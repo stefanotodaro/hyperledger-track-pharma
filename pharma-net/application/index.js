@@ -170,7 +170,7 @@ app.post('/createPO',JWT.authenticateToken, (req, res) => {
 
 app.post('/createShipment',JWT.authenticateToken, (req, res) => {
     console.log("Create Shipment for PO - Start");
-    createShipment.execute(req.body.buyerCRN, req.body.drugName, req.body.listOfAssets,req.body.transporterCRN, req.body.orgRole).then ((shipment) => {
+    createShipment.execute(req.body.buyerCRN, req.body.uniqueCode, req.body.listOfAssets,req.body.transporterCRN, req.body.orgRole).then ((shipment) => {
         console.log('Shipment Added successfully');
         const result = {
             status: 'success',
@@ -213,7 +213,7 @@ app.post('/updateShipment',JWT.authenticateToken, (req, res) => {
 
 app.post('/retailDrugDecommissioning',JWT.authenticateToken, (req, res) => {
     console.log("Update Shipment for PO - Start");
-    retailDrugDecommissioning.execute(req.body.drugName, req.body.serialNo,req.body.retailerCRN, req.body.customerAadhar, req.body.orgRole).then ((drugStatus) => {
+    retailDrugDecommissioning.execute(req.body.uniqueCode, req.body.serialNo,req.body.retailerCRN, req.body.customerAadhar, req.body.orgRole).then ((drugStatus) => {
         console.log('Drug Sold successfully');
         const result = {
             status: 'success',
@@ -236,7 +236,7 @@ app.post('/retailDrugDecommissioning',JWT.authenticateToken, (req, res) => {
 
 app.post('/viewHistory',JWT.authenticateToken, (req, res) => {
     console.log("Update Shipment for PO - Start");
-    viewHistory.execute(req.body.drugName, req.body.serialNo,req.body.orgRole).then ((drugHistory) => {
+    viewHistory.execute(req.body.uniqueCode, req.body.serialNo,req.body.orgRole).then ((drugHistory) => {
         console.log('Drug History');
         const result = {
             status: 'success',
@@ -258,7 +258,7 @@ app.post('/viewHistory',JWT.authenticateToken, (req, res) => {
 
 app.post('/viewDrugCurrentState',JWT.authenticateToken, (req, res) => {
     console.log("View current state of drug");
-    viewDrugCurrentState.execute(req.body.drugName, req.body.serialNo,req.body.orgRole).then ((drugStatus) => {
+    viewDrugCurrentState.execute(req.body.uniqueCode, req.body.serialNo,req.body.orgRole).then ((drugStatus) => {
         console.log('Drug Current Status');
         const result = {
             status: 'success',

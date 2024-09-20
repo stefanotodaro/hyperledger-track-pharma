@@ -9,18 +9,18 @@ const helper = require('./contractHelper');
 /**
  * @description Module to create an shipment request for a particular PO raised either by Distributor or Retailer. After this transaction the owner of the drugs will be Transporter who will be shipping these drugs.
  * @param {*} buyerCRN Unique CRN of buyer (either distributor or retailer) who has raised PO
- * @param {*} drugName Drug name which needs to be shipped
+ * @param {*} uniqueCode identifier code of the drug
  * @param {*} listOfAssets List of serial numbers to be shipped
  * @param {*} transporterCRN Unique CRN of transporter who will be shipping this to buyer location
  * @param {*} organisationRole Sent by client app who initiates this transaction, i.e. either distributor or retailer
  */
-async function main(buyerCRN, drugName, listOfAssets,transporterCRN,organisationRole) {
+async function main(buyerCRN, uniqueCode, listOfAssets,transporterCRN,organisationRole) {
 
 	try {
 		const pharmanetContract = await helper.getContractInstance(organisationRole);
 
 		console.log('.....Requesting to create shipment for an PO on the Network');
-		const newPOBuffer = await pharmanetContract.submitTransaction('createShipment', buyerCRN, drugName, listOfAssets,transporterCRN);
+		const newPOBuffer = await pharmanetContract.submitTransaction('createShipment', buyerCRN, uniqueCode, listOfAssets,transporterCRN);
 
 		// process response
 		console.log('.....Processing Create Shipment Transaction Response \n\n');

@@ -8,17 +8,17 @@ const helper = require('./contractHelper');
 
 /**
  * @description Module to view current status of an drug at anytime an organsation wants to see
- * @param {*} drugName Name of the drug
+ * @param {*} uniqueCode identifier code of the drug
  * @param {*} serialNo Serial no. (batch) of the drug for which the status to be retrieved
  * @param {*} organisationRole Orgnisation who wants to view current status of an drug
  */
-async function main(drugName, serialNo,organisationRole) {
+async function main(uniqueCode, serialNo,organisationRole) {
 
 	try {
 		const pharmanetContract = await helper.getContractInstance(organisationRole);
 
 		console.log('.....Requesting to view current status of drug on the Network');
-		const newPOBuffer = await pharmanetContract.submitTransaction('viewDrugCurrentState', drugName, serialNo);
+		const newPOBuffer = await pharmanetContract.submitTransaction('viewDrugCurrentState', uniqueCode, serialNo);
 
 		// process response
 		console.log('.....Processing view current drug status Transaction Response \n\n');

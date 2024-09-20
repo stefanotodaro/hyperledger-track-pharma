@@ -8,19 +8,19 @@ const helper = require('./contractHelper');
 
 /**
  * @description Module to transfer the ownership of drug from Retailer to Consumer
- * @param {*} drugName  Name of the drug
+ * @param {*} uniqueCode identifier code of the drug
  * @param {*} serialNo  Serial No. (batch) of the drug
  * @param {*} retailerCRN  Unique CRN of the company who is selling the drug to consumer
  * @param {*} customerAadhar Aadhaar (name) of the consumer
  * @param {*} organisationRole role of the organisation who will be initiating this process, i.e. retailer
  */
-async function main(drugName, serialNo,retailerCRN, customerAadhar,organisationRole) {
+async function main(uniqueCode,serialNo,retailerCRN, customerAadhar,organisationRole) {
 
 	try {
 		const pharmanetContract = await helper.getContractInstance(organisationRole);
 
 		console.log('.....Requesting to create Retail Drug on the Network');
-		const newPOBuffer = await pharmanetContract.submitTransaction('retailDrug', drugName, serialNo,retailerCRN, customerAadhar);
+		const newPOBuffer = await pharmanetContract.submitTransaction('retailDrug',uniqueCode, serialNo,retailerCRN, customerAadhar);
 
 		// process response
 		console.log('.....Processing Retail Drug Transaction Response \n\n');

@@ -8,17 +8,17 @@ const helper = require('./contractHelper');
 
 /**
  * @description Module to view complete history of an drug on the network
- * @param {*} drugName Name of the drug
- * @param {*} serialNo Senrial no. (batch) of the drug
+ * @param {*} uniqueCode identifier code of the drug
+ * @param {*} serialNo Serial no. (batch) of the drug
  * @param {*} organisationRole Organisation name who wants to view history of an drug
  */
-async function main(drugName, serialNo,organisationRole) {
+async function main(uniqueCode, serialNo,organisationRole) {
 
 	try {
 		const pharmanetContract = await helper.getContractInstance(organisationRole);
 
 		console.log('.....Requesting to view history on the Network');
-		const newPOBuffer = await pharmanetContract.submitTransaction('viewHistory', drugName, serialNo);
+		const newPOBuffer = await pharmanetContract.submitTransaction('viewHistory', uniqueCode, serialNo);
 
 		// process response
 		console.log('.....Processing view history of  Drug Transaction Response \n\n');
