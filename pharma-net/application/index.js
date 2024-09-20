@@ -121,7 +121,14 @@ app.post('/registerCompany',JWT.authenticateToken, (req, res) => {
 
 app.post('/addDrug',JWT.authenticateToken, (req, res) => {
     console.log("Drug Addition start");
-    addDrug.execute(req.body.drugName, req.body.serialNo, req.body.mfgDate, req.body.expDate, req.body.companyCRN, req.body.orgRole).then ((drug) => {
+    addDrug.execute(req.body.drugName, 
+                    req.body.uniqueCode, 
+                    req.body.serialNo, 
+                    req.body.lotNumber, 
+                    req.body.mfgDate, 
+                    req.body.expDate, 
+                    req.body.companyCRN,
+                    req.body.orgRole).then ((drug) => {
         console.log('Drug Added successfully');
         const result = {
             status: 'success',
